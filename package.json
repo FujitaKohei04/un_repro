@@ -12,6 +12,7 @@
   "dependencies": {
     "@tanstack/react-router": "^1.161.1",
     "@vanilla-extract/css": "^1.18.0",
+    "@vanilla-extract/recipes": "^0.5.7",
     "jotai": "^2.18.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
