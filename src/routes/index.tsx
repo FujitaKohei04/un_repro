@@ -14,7 +14,7 @@ function Index() {
       {/* to about追加することで、TanStackが自動でルートを追加してくれる */}
       <Link to="/about" >About Page</Link>
       <Button color='primary' size='medium' onClick={() => alert('clicked!')}>Alart</Button>
-      <div className='text-5xl'>fjadklf;</div>
+      <div className='text-5xl'>df;klalf;</div>
       <div className='text-5xl'>fjadklf;</div>
       <div className='text-5xl'>fjadklf;</div>
       <div className='text-5xl'>fjadklf;</div>
