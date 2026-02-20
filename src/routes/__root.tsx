@@ -8,6 +8,7 @@ export const Route = createRootRoute({
       <header className="p-4 bg-gray-100 flex justify-between items-center gap-4 sticky top-0 ">
         <Link to="/" className="[&.active]:font-bold text-gray-700">Home</Link>
         <Link to="/about" className="[&.active]:font-bold text-gray-700">About</Link>
+        <Link to="/interExternal" className="[&.active]:font-bold text-gray-700">inEx</Link>
       </header>
       <hr />
       {/* Outlet が「各ページの内容」に置き換わります */}
