@@ -9,10 +9,16 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as OfficeMapRouteImport } from './routes/office-map'
 import { Route as InterExternalRouteImport } from './routes/interExternal'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 
+const OfficeMapRoute = OfficeMapRouteImport.update({
+  id: '/office-map',
+  path: '/office-map',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const InterExternalRoute = InterExternalRouteImport.update({
   id: '/interExternal',
   path: '/interExternal',
@@ -33,34 +39,45 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/interExternal': typeof InterExternalRoute
+  '/office-map': typeof OfficeMapRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/interExternal': typeof InterExternalRoute
+  '/office-map': typeof OfficeMapRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/interExternal': typeof InterExternalRoute
+  '/office-map': typeof OfficeMapRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/interExternal'
+  fullPaths: '/' | '/about' | '/interExternal' | '/office-map'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/interExternal'
-  id: '__root__' | '/' | '/about' | '/interExternal'
+  to: '/' | '/about' | '/interExternal' | '/office-map'
+  id: '__root__' | '/' | '/about' | '/interExternal' | '/office-map'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   InterExternalRoute: typeof InterExternalRoute
+  OfficeMapRoute: typeof OfficeMapRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/office-map': {
+      id: '/office-map'
+      path: '/office-map'
+      fullPath: '/office-map'
+      preLoaderRoute: typeof OfficeMapRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/interExternal': {
       id: '/interExternal'
       path: '/interExternal'
@@ -89,6 +106,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   InterExternalRoute: InterExternalRoute,
+  OfficeMapRoute: OfficeMapRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
