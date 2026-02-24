@@ -19,6 +19,7 @@ export const Route = createRootRoute({
             <Link to="/about" className="[&.active]:font-bold text-gray-700">About</Link>
             <Link to="/interExternal" className="[&.active]:font-bold text-gray-700">inEx</Link>
             <Link to="/office-map" className="[&.active]:font-bold text-gray-700">座席表</Link>
+            <Link to="/office-map-by-svg" className="[&.active]:font-bold text-gray-700">座席表(svg)</Link>
           </div>
           <button onClick={toggleEditMode} className={editButtonClass}>
             {isEditMode ? '完了' : '編集モード'}

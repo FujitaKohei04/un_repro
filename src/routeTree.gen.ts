@@ -9,11 +9,17 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as OfficeMapBySvgRouteImport } from './routes/office-map-by-svg'
 import { Route as OfficeMapRouteImport } from './routes/office-map'
 import { Route as InterExternalRouteImport } from './routes/interExternal'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 
+const OfficeMapBySvgRoute = OfficeMapBySvgRouteImport.update({
+  id: '/office-map-by-svg',
+  path: '/office-map-by-svg',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const OfficeMapRoute = OfficeMapRouteImport.update({
   id: '/office-map',
   path: '/office-map',
@@ -40,12 +46,14 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/interExternal': typeof InterExternalRoute
   '/office-map': typeof OfficeMapRoute
+  '/office-map-by-svg': typeof OfficeMapBySvgRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/interExternal': typeof InterExternalRoute
   '/office-map': typeof OfficeMapRoute
+  '/office-map-by-svg': typeof OfficeMapBySvgRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -53,13 +61,25 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/interExternal': typeof InterExternalRoute
   '/office-map': typeof OfficeMapRoute
+  '/office-map-by-svg': typeof OfficeMapBySvgRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/interExternal' | '/office-map'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/interExternal'
+    | '/office-map'
+    | '/office-map-by-svg'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/interExternal' | '/office-map'
-  id: '__root__' | '/' | '/about' | '/interExternal' | '/office-map'
+  to: '/' | '/about' | '/interExternal' | '/office-map' | '/office-map-by-svg'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/interExternal'
+    | '/office-map'
+    | '/office-map-by-svg'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -67,10 +87,18 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   InterExternalRoute: typeof InterExternalRoute
   OfficeMapRoute: typeof OfficeMapRoute
+  OfficeMapBySvgRoute: typeof OfficeMapBySvgRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/office-map-by-svg': {
+      id: '/office-map-by-svg'
+      path: '/office-map-by-svg'
+      fullPath: '/office-map-by-svg'
+      preLoaderRoute: typeof OfficeMapBySvgRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/office-map': {
       id: '/office-map'
       path: '/office-map'
@@ -107,6 +135,7 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   InterExternalRoute: InterExternalRoute,
   OfficeMapRoute: OfficeMapRoute,
+  OfficeMapBySvgRoute: OfficeMapBySvgRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
