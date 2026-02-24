@@ -84,7 +84,20 @@ export const select = style({
   },
 });
 
-export const closeButton = style({
+export const input = style({
+  flex: 1,
+  borderRadius: 4,
+  padding: '10px',
+  fontSize: 15,
+  border: '1px solid #ccc',
+  backgroundColor: '#f8f8f8',
+  ':focus': {
+    borderColor: '#2196f3',
+    outline: 'none'
+  },
+});
+
+export const saveButton = style({
     backgroundColor: '#2196f3',
     color: 'white',
     border: 'none',
@@ -95,6 +108,20 @@ export const closeButton = style({
     transition: 'background-color 0.2s',
     ':hover': {
       backgroundColor: '#1976d2',
+    }
+});
+
+export const closeButton = style({
+    backgroundColor: '#aaa',
+    color: 'white',
+    border: 'none',
+    padding: '10px 20px',
+    borderRadius: 4,
+    cursor: 'pointer',
+    fontWeight: 'bold',
+    transition: 'background-color 0.2s',
+    ':hover': {
+      backgroundColor: '#888',
     }
 });
 

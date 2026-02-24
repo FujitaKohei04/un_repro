@@ -1,25 +1,27 @@
-import React from 'react';
-import type { MapCellData, Employee } from '../../../types/office';
+import React, { useState } from 'react';
+import type { Cell, Employee } from '../../../types/office';
 import { useOfficeStore } from '../../../store/officeStore';
+import { EditModal } from '../EditModal/EditModal';
 import * as styles from './MapCell.css';
 
 type MapCellProps = {
-  cellData: MapCellData;
-  employee?: Employee;
+  cellData: Cell;
+  employee?: Employee; // This might be redundant now as employee is in cellData
   isHighlighted: boolean;
 };
 
-export const MapCell: React.FC<MapCellProps> = ({ cellData, employee, isHighlighted }) => {
-  const { isEditMode, setEditingCell } = useOfficeStore();
+export const MapCell: React.FC<MapCellProps> = ({ cellData, isHighlighted }) => {
+  const { isEditMode, updateCell } = useOfficeStore();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const getCellContent = () => {
-    // ... (content is the same)
+    const currentEmployee = cellData.employee;
     switch (cellData.type) {
       case 'seat':
         return (
           <div className={styles.contentWrapper}>
-            <p className={styles.employeeName}>{employee?.name || '空席'}</p>
-            <p className={styles.employeeExt}>{employee?.extension ? `(ext: ${employee.extension})` : ''}</p>
+            <p className={styles.employeeName}>{currentEmployee?.name || '空席'}</p>
+            <p className={styles.employeeExt}>{currentEmployee?.extensionNumber ? `(内線: ${currentEmployee.extensionNumber})` : ''}</p>
           </div>
         );
       case 'president_room':
@@ -39,15 +41,32 @@ export const MapCell: React.FC<MapCellProps> = ({ cellData, employee, isHighligh
 
   const handleClick = () => {
     if (isEditMode) {
-      setEditingCell(cellData);
+      setIsModalOpen(true);
     }
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleSaveCell = (updatedCell: Cell) => {
+    updateCell(updatedCell);
+    // The modal is closed by its own logic now
   };
 
   const finalClassName = `${styles.cell} ${styles.cellType[cellData.type]} ${!isHighlighted ? styles.dimmed : ''} ${isEditMode ? styles.editable : ''}`;
 
   return (
-    <div className={finalClassName} onClick={handleClick}>
-      {getCellContent()}
-    </div>
+    <>
+      <div className={finalClassName} onClick={handleClick}>
+        {getCellContent()}
+      </div>
+      <EditModal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        cell={cellData}
+        onSave={handleSaveCell}
+      />
+    </>
   );
 };

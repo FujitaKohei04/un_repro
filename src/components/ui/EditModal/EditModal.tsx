@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
-import { useOfficeStore } from '../../../store/officeStore';
-import { employees } from '../../../data/dummyData';
-import type　{ CellType } from '../../../types/office';
 import * as styles from './EditModal.css';
+import type { Cell, CellType, Employee } from '../../../types/office';
+
+interface EditModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  cell: Cell | null;
+  onSave: (updatedCell: Cell) => void;
+}
 
 const CELL_TYPE_OPTIONS: { value: CellType; label: string }[] = [
   { value: 'seat', label: '座席' },
@@ -14,89 +19,111 @@ const CELL_TYPE_OPTIONS: { value: CellType; label: string }[] = [
   { value: 'empty', label: '空きスペース' },
 ];
 
-export const EditModal: React.FC = () => {
-  const {
-    editingCell,
-    setEditingCell,
-    updateCellType,
-    assignEmployeeToCell,
-    unassignEmployeeFromCell,
-  } = useOfficeStore();
+export const EditModal: React.FC<EditModalProps> = ({ isOpen, onClose, cell, onSave }) => {
+  const [type, setType] = useState<CellType>('empty');
+  const [employeeName, setEmployeeName] = useState('');
+  const [extensionNumber, setExtensionNumber] = useState('');
 
-  const handleOpenChange = (isOpen: boolean) => {
-    if (!isOpen) {
-      setEditingCell(null);
+  useEffect(() => {
+    if (cell) {
+      setType(cell.type);
+      setEmployeeName(cell.employee?.name || '');
+      setExtensionNumber(cell.employee?.extensionNumber || '');
+    } else {
+      // Reset form when modal is closed or cell is null
+      setType('empty');
+      setEmployeeName('');
+      setExtensionNumber('');
+    }
+  }, [cell]);
+
+  const handleSave = () => {
+    if (cell) {
+      const newEmployeeData: Employee | undefined = type === 'seat' ? {
+        id: cell.employee?.id || `emp_${Date.now()}`, // Preserve ID if exists
+        name: employeeName,
+        extensionNumber: extensionNumber,
+        department: cell.employee?.department || '', // Preserve other data
+        group: cell.employee?.group || '',
+        role: cell.employee?.role || '',
+      } : undefined;
+
+      const updatedCell: Cell = {
+        ...cell,
+        type,
+        employee: newEmployeeData,
+        employeeId: newEmployeeData?.id,
+      };
+      onSave(updatedCell);
+      onClose();
     }
   };
-
-  const handleCellTypeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    if (!editingCell) return;
-    const newType = e.target.value as CellType;
-    updateCellType(editingCell.id, newType);
-  };
-
-  const handleEmployeeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    if (!editingCell) return;
-    const newEmployeeId = e.target.value;
-    if (newEmployeeId) {
-      assignEmployeeToCell(editingCell.id, newEmployeeId);
-    } else {
-      unassignEmployeeFromCell(editingCell.id);
+  
+  const handleOpenChange = (open: boolean) => {
+    if (!open) {
+      onClose();
     }
   };
 
   return (
-    <Dialog.Root open={!!editingCell} onOpenChange={handleOpenChange}>
+    <Dialog.Root open={isOpen} onOpenChange={handleOpenChange}>
       <Dialog.Portal>
         <Dialog.Overlay className={styles.overlay} />
         <Dialog.Content className={styles.content}>
           <Dialog.Title className={styles.title}>セルの編集</Dialog.Title>
           <Dialog.Description className={styles.description}>
-            セルの種類や割り当てる社員を変更します。
+            セルの種類や割り当てる社員情報を変更します。
           </Dialog.Description>
           
-          {editingCell && (
-            <div className={styles.formContainer}>
-              <fieldset className={styles.fieldset}>
-                <label className={styles.label} htmlFor="cell-type">
-                  セルの種類
-                </label>
-                <select
-                  id="cell-type"
-                  value={editingCell.type}
-                  onChange={handleCellTypeChange}
-                  className={styles.select}
-                >
-                  {CELL_TYPE_OPTIONS.map(opt => (
-                    <option key={opt.value} value={opt.value}>{opt.label}</option>
-                  ))}
-                </select>
-              </fieldset>
-              
-              {editingCell.type === 'seat' && (
+          <div className={styles.formContainer}>
+            <fieldset className={styles.fieldset}>
+              <label className={styles.label} htmlFor="cell-type">
+                セルの種類
+              </label>
+              <select
+                id="cell-type"
+                value={type}
+                onChange={(e) => setType(e.target.value as CellType)}
+                className={styles.select}
+              >
+                {CELL_TYPE_OPTIONS.map(opt => (
+                  <option key={opt.value} value={opt.value}>{opt.label}</option>
+                ))}
+              </select>
+            </fieldset>
+            
+            {type === 'seat' && (
+              <>
                 <fieldset className={styles.fieldset}>
-                  <label className={styles.label} htmlFor="employee">
-                    社員の割り当て
-                  </label>
-                  <select
-                    id="employee"
-                    value={editingCell.employeeId || ''}
-                    onChange={handleEmployeeChange}
-                    className={styles.select}
-                  >
-                    <option value="">未割り当て</option>
-                    {employees.map(emp => (
-                      <option key={emp.id} value={emp.id}>{emp.name}</option>
-                    ))}
-                  </select>
+                  <label className={styles.label} htmlFor="employee-name">社員名</label>
+                  <input
+                    id="employee-name"
+                    className={styles.input}
+                    type="text"
+                    value={employeeName}
+                    placeholder="山田 太郎"
+                    onChange={(e) => setEmployeeName(e.target.value)}
+                  />
                 </fieldset>
-              )}
-            </div>
-          )}
+                <fieldset className={styles.fieldset}>
+                  <label className={styles.label} htmlFor="extension-number">内線番号</label>
+                  <input
+                    id="extension-number"
+                    className={styles.input}
+                    type="text"
+                    value={extensionNumber}
+                    placeholder="1234"
+                    onChange={(e) => setExtensionNumber(e.target.value)}
+                  />
+                </fieldset>
+              </>
+            )}
+          </div>
 
-          <div style={{ display: 'flex', marginTop: 25, justifyContent: 'flex-end' }}>
+          <div style={{ display: 'flex', marginTop: 25, justifyContent: 'flex-end', gap: '10px' }}>
+            <button onClick={handleSave} className={styles.saveButton}>保存</button>
             <Dialog.Close asChild>
-              <button className={styles.closeButton}>完了</button>
+                <button className={styles.closeButton}>キャンセル</button>
             </Dialog.Close>
           </div>
           <Dialog.Close asChild>

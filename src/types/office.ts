@@ -2,28 +2,30 @@
  * 社員情報を表す型
  */
 export type Employee = {
-  id: string; // 一意のID
-  name: string; // 名前
-  extension: string; // 内線番号
-  team: string; // グループ内の担当
+  id: string;
+  name: string;
+  extensionNumber: string;
+  department: string;
+  group: string;
+  role: string;
 };
 
 /**
  * グループ情報を表す型
  */
 export type Team = {
-  id: string; // 一意のID
-  name: string; // グループ名
-  departmentId: string; // 所属する部署のID
-  members: Employee[]; // 所属する社員のリスト
+  id:string;
+  name: string;
+  departmentId: string;
+  members: Employee[];
 };
 
 /**
  * 部署情報を表す型
  */
 export type Department = {
-  id: string; // 一意のID
-  name: string; // 部署名
+  id: string;
+  name: string;
 };
 
 /**
@@ -38,12 +40,13 @@ export type Department = {
 export type CellType = 'seat' | 'path' | 'rest_area' | 'meeting_room' | 'president_room' | 'empty';
 
 /**
- * 座席マップの各セルのデータを表す型
+ * 座席マップの各セルのデータを表す型 (旧 MapCellData)
  */
-export type MapCellData = {
+export type Cell = {
   id: string; // セルの一意のID (例: "row1-col3")
   type: CellType; // セルの種類
   employeeId?: string; // 'seat' の場合に社員IDを格納
+  employee?: Employee; // 'seat' の場合に社員情報を格納
 };
 
 /**
@@ -52,5 +55,5 @@ export type MapCellData = {
 export type OfficeLayout = {
   rows: number; // グリッドの行数
   cols: number; // グリッドの列数
-  cells: MapCellData[]; // セルデータの配列
+  cells: Cell[]; // セルデータの配列
 };
