@@ -29,6 +29,8 @@ export const avatarBase = recipe({
         transitionDuration: '150ms',
         transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)',
 
+        borderColor: '#000000',
+
 
 
         selectors: {
@@ -40,11 +42,11 @@ export const avatarBase = recipe({
   ],
   variants: {
     state: {
-        active: {borderColor: '#8ff63b'}, 
-        away: {borderColor: '#f63b3b'}, 
-        meeting: {borderColor: '#f6e33b'}, 
+        active: {borderColor: '#1ccc65'}, 
+        away: {borderColor: '#e2b843'}, 
+        out: {borderColor: '#3085ca'},
+        meeting: {borderColor: '#ca3434'}, 
         empty: {borderColor: '#969aa0'}, 
-        default: {borderColor: '#e2e8f0'}
     }
   }
 });
