@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import type { Cell, Employee } from '../../../types/office';
+import type { Cell, Employee } from '../../../types/office2';
 import { useOfficeStore } from '../../../store/officeStore';
 import { EditModal } from '../EditModal/EditModal';
 import * as styles from './MapCell.css';

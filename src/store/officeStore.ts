@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import type { OfficeLayout, Cell } from '../types/office';
+import type { OfficeLayout, Cell } from '../types/office2';
 import { officeLayout as initialLayout } from '../data/dummyData';
 
 interface OfficeState {

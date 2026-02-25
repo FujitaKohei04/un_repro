@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
 import * as styles from './EditModal.css';
-import type { Cell, CellType, Employee } from '../../../types/office';
+import type { Cell, CellType, Employee } from '../../../types/office2';
 
 interface EditModalProps {
   isOpen: boolean;

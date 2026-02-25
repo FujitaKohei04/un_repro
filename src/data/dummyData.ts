@@ -1,4 +1,4 @@
-import type { Department, Team, Employee, OfficeLayout, Cell } from '../types/office';
+import type { Department, Team, Employee, OfficeLayout, Cell } from '../types/office2';
 
 // --- 社員データ ---
 export const employees: Employee[] = [

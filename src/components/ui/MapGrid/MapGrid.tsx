@@ -1,5 +1,5 @@
 import React from 'react';
-import type { OfficeLayout, Employee } from '../../../types/office';
+import type { OfficeLayout, Employee } from '../../../types/office2';
 import { MapCell } from '../MapCell/MapCell';
 import * as styles from './MapGrid.css';
 

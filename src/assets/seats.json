@@ -1,0 +1,25 @@
+[
+  { "x": 60, "y": 50, "isExistedEmp": true, "vector": { "x": true, "y": false }, "emp": { "id": "1001", "name": "佐藤 健一", "icon": "/icons/1001.png", "status": "active", "role": "マネージャー", "department": "営業部", "group": "営業G", "team": "国内販売T", "internalNumber": "101" } },
+  { "x": 60, "y": 80, "isExistedEmp": true, "vector": { "x": true, "y": false }, "emp": { "id": "1014", "name": "松本 潤", "icon": "/icons/1014.png", "status": "active", "role": "マネージャー", "department": "営業部", "group": "営業G", "team": "国内販売T", "internalNumber": "102" } },
+  { "x": 60, "y": 110, "isExistedEmp": true, "vector": { "x": true, "y": false }, "emp": { "id": "1007", "name": "山本 真二", "icon": "/icons/1007.png", "status": "away", "role": "ディレクター", "department": "営業部", "group": "営業G", "team": "海外事業T", "internalNumber": "105" } },
+  { "x": 60, "y": 140, "isExistedEmp": true, "vector": { "x": true, "y": false }, "emp": { "id": "1003", "name": "高橋 美咲", "icon": "/icons/1003.png", "status": "meeting", "role": "デザイナー", "department": "営業部", "group": "マーケティングG", "team": "SNS戦略T", "internalNumber": "312" } },
+  { "x": 60, "y": 170, "isExistedEmp": true, "vector": { "x": true, "y": false }, "emp": { "id": "1010", "name": "加藤 恵子", "icon": "/icons/1010.png", "status": "meeting", "role": "エンジニア", "department": "営業部", "group": "マーケティングG", "team": "広告運用T", "internalNumber": "315" } },
+  
+  { "x": 86, "y": 50, "isExistedEmp": true, "vector": { "x": false, "y": false }, "emp": { "id": "1012", "name": "山田 太郎", "icon": "/icons/1012.png", "status": "away", "role": "マネージャー", "department": "営業部", "group": "企画G", "team": "市場調査T", "internalNumber": "508" } },
+  { "x": 86, "y": 80, "isExistedEmp": true, "vector": { "x": false, "y": true }, "emp": { "id": "1006", "name": "伊藤 博", "icon": "/icons/1006.png", "status": "meeting", "role": "マネージャー", "department": "無所属", "group": "社長室", "team": "秘書T", "internalNumber": "001" } },
+  { "x": 86, "y": 110, "isExistedEmp": true, "vector": { "x": false, "y": true }, "emp": { "id": "1015", "name": "井上 真央", "icon": "/icons/1015.png", "status": "meeting", "role": "ディレクター", "department": "無所属", "group": "社長室", "team": "広報T", "internalNumber": "005" } },
+  { "x": 86, "y": 140, "isExistedEmp": true, "vector": { "x": false, "y": true }, "emp": { "id": "1002", "name": "鈴木 一郎", "icon": "/icons/1002.png", "status": "away", "role": "エンジニア", "department": "無所属", "group": "開発G", "team": "フロントエンドT", "internalNumber": "205" } },
+  { "x": 86, "y": 170, "isExistedEmp": true, "vector": { "x": false, "y": true }, "emp": { "id": "1005", "name": "渡辺 杏奈", "icon": "/icons/1005.png", "status": "active", "role": "エンジニア", "department": "無所属", "group": "開発G", "team": "バックエンドT", "internalNumber": "206" } },
+
+  { "x": 160, "y": 50, "isExistedEmp": true, "vector": { "x": true, "y": true }, "emp": { "id": "1011", "name": "吉田 拓海", "icon": "/icons/1011.png", "status": "active", "role": "エンジニア", "department": "無所属", "group": "開発G", "team": "インフラT", "internalNumber": "210" } },
+  { "x": 160, "y": 80, "isExistedEmp": true, "vector": { "x": true, "y": false }, "emp": { "id": "1004", "name": "田中 裕太", "icon": "/icons/1004.png", "status": "active", "role": "ディレクター", "department": "無所属", "group": "制作G", "team": "デザインT", "internalNumber": "401" } },
+  { "x": 160, "y": 110, "isExistedEmp": true, "vector": { "x": true, "y": false }, "emp": { "id": "1013", "name": "佐々木 希", "icon": "/icons/1013.png", "status": "active", "role": "デザイナー", "department": "無所属", "group": "制作G", "team": "デザインT", "internalNumber": "402" } },
+  { "x": 160, "y": 140, "isExistedEmp": true, "vector": { "x": true, "y": true }, "emp": { "id": "1009", "name": "小林 誠", "icon": "/icons/1009.png", "status": "active", "role": "ディレクター", "department": "無所属", "group": "制作G", "team": "動画編集T", "internalNumber": "405" } },
+  { "x": 160, "y": 170, "isExistedEmp": true, "vector": { "x": true, "y": false }, "emp": { "id": "1008", "name": "中村 結衣", "icon": "/icons/1008.png", "status": "active", "role": "デザイナー", "department": "無所属", "group": "企画G", "team": "新規事業T", "internalNumber": "502" } },
+
+  { "x": 186, "y": 50, "isExistedEmp": true, "vector": { "x": false, "y": false }, "emp": { "id": "1016", "name": "木村 拓哉", "icon": "/icons/1016.png", "status": "active", "role": "マネージャー", "department": "無所属", "group": "企画G", "team": "新規事業T", "internalNumber": "503" } },
+  { "x": 186, "y": 80, "isExistedEmp": false, "vector": { "x": false, "y": true } },
+  { "x": 186, "y": 110, "isExistedEmp": false, "vector": { "x": false, "y": false } },
+  { "x": 186, "y": 140, "isExistedEmp": false, "vector": { "x": false, "y": false } },
+  { "x": 186, "y": 170, "isExistedEmp": false, "vector": { "x": false, "y": true } }
+]
